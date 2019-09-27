@@ -15,8 +15,11 @@ public class BlogPage extends BasePage {
         return driver.findElement(entry).getText().equals(strTitle);
     }
 
-    public AdminPanelPage getAdminPanel() {
+    public AdminPanelPage getAdminPanel() throws InterruptedException {
+
+        Thread.sleep(2000);
         driver.get("https://igorakintev.ru/admin/blog/entry/");
+
         return new AdminPanelPage(driver);
     }
 }

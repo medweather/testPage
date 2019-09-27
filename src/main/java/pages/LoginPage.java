@@ -13,10 +13,16 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
-    public MainPage loginToSite(String strUsername, String strPassword) {
+    public MainPage loginToSite(String strUsername, String strPassword) throws InterruptedException {
+
         driver.findElement(username).sendKeys(strUsername);
+        Thread.sleep(1000);
+
         driver.findElement(password).sendKeys(strPassword);
+        Thread.sleep(1000);
+
         driver.findElement(loginButton).click();
+        
         return new MainPage(driver);
     }
 }

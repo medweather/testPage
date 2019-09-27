@@ -16,8 +16,12 @@ public class MainPage extends BasePage {
         return driver.findElement(header).getText().equals(strHeader);
     }
 
-    public AddEntryPage addedEntries() {
+    public AddEntryPage addedEntries() throws InterruptedException {
+
+        Thread.sleep(2000);
         driver.findElement(addEntries).click();
+
+        Thread.sleep(2000);
         return new AddEntryPage(driver);
     }
 }

@@ -1,9 +1,7 @@
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.*;
 
 import static org.testng.Assert.assertFalse;
@@ -21,16 +19,16 @@ public class TestPages {
     }
 
     @Test
-    private void autoTestSite() {
+    private void autoTestSite() throws InterruptedException {
 
-        // инициализация логин-страницы
+        // инициализируем логин-страницу
         LoginPage login = new LoginPage(driver);
 
-        // вход в систему и проверка заголовка "Панель управления"
+        // заполняем поля, входим в систему и проверяем, что заголовок - "Панель управления"
         MainPage mainPage = login.loginToSite("selenium", "super_password");
         assertTrue(mainPage.verifyHeader("Панель управления"));
 
-        // инициализация страницы "Добавить entry" и проверка, что заголовок - "Добавить entry"
+        // переходим на страницу "Добавить entry" и проверяем, что заголовок - "Добавить entry"
         AddEntryPage addPage = mainPage.addedEntries();
         assertTrue(addPage.verifyHeader("Добавить entry"));
 
@@ -39,14 +37,15 @@ public class TestPages {
         String randTextMark = RandomStringUtils.randomAlphanumeric(25);
         String randText = RandomStringUtils.randomAlphanumeric(15);
 
-        // сохранение entry, переход на страницу блога и проверка, что данная запись сохранилась
+        // заполняем поля, сохраняем запись, переходим на страницу блога и проверяем, что данная запись сохранилась
         BlogPage blogPage = addPage.saveEntry(randTitle, randSlug, randTextMark, randText);
         assertTrue(blogPage.verifyEntry(randTitle));
 
-        // переход в админ-панель, удаление entry и проверка после удаления
+        // переходим в админ-панель, удаляем entry и проверяем после удаления
         AdminPanelPage adminPanel = blogPage.getAdminPanel();
         adminPanel.deleteEntry();
         assertFalse(adminPanel.verifyDeletedEntry(randTitle));
+        
     }
 
     @AfterClass
