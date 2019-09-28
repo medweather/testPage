@@ -1,3 +1,5 @@
+package testPages;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,7 +47,8 @@ public class TestPages {
         AdminPanelPage adminPanel = blogPage.getAdminPanel();
         adminPanel.deleteEntry();
         assertFalse(adminPanel.verifyDeletedEntry(randTitle));
-        
+
+        System.out.println("The test was successful!");
     }
 
     @AfterClass
